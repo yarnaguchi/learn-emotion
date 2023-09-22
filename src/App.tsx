@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { useEffect, useState } from "react";
 
-function App() {
+const paragraph = css`
+  color: turquoise;
+
+  header & {
+    color: green;
+  }
+`;
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log(count);
+  }, [count]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <p css={paragraph}>This is green since it's inside a header</p>
       </header>
+      <p css={paragraph}>This is turquoise since it's not inside a header.</p>
+      <button onClick={() => setCount((before) => before + 1)}>up</button>
     </div>
   );
 }
-
-export default App;
